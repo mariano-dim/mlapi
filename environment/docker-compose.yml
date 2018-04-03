@@ -6,11 +6,11 @@ services:
     image: mongo:latest
     container_name: "mongodb"
     environment:
-      - MONGO_DATA_DIR=/data/db
+     # - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/
     volumes:
       - ./data/db:/data/db
-      - ./mongo_realdata:/tmp/mongodata:ro
+      - ./mongo_realdata:/tmp/mongodata
     ports:
        - 27017:27017
     command: mongod --smallfiles --logpath=/dev/null # --quiet
