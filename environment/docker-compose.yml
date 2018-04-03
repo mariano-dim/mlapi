@@ -3,11 +3,17 @@ version: '2'
 services:
 
   mongo:
-    image: registry.intraway.com/mongo:3.4.3
+    image: mongo:latest
+    container_name: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/
     volumes:
+      - ./data/db:/data/db
       - ./mongo_realdata:/tmp/mongodata:ro
     ports:
-      - "27017:27017"
+       - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
     logging:
       driver: "json-file"
       options:
