@@ -30,4 +30,5 @@ nbdist/
 bin/
 build/
 logs/
-
+/target
+/environment/data/db
