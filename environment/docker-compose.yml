@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+
+  mongo:
+    image: registry.intraway.com/mongo:3.4.3
+    volumes:
+      - ./mongo_realdata:/tmp/mongodata:ro
+    ports:
+      - "27017:27017"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "1"
+
+  mongo-express:
+    image: autopilotpattern/mongo-express
+    restart: always
+    mem_limit: "512m"
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+      - ME_CONFIG_MONGODB_SERVER=mongo
+    labels:
+      - triton.cns.services=mongo-express
+    ports:
+      - "8081:8081"
+
